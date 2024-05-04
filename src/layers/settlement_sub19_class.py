@@ -4,7 +4,7 @@ import geopandas as gpd
 import pandas as pd
 
 class OSMSettlementsDataDownloader:
-    def __init__(self, geojson_path, crs_project, crs_global, country_code):
+    def __init__(self, geojson_path, crs_project, crs_global, country_code, output_path):
         self.geojson_path = geojson_path
         self.crs_project = crs_project
         self.crs_global = crs_global
@@ -13,7 +13,7 @@ class OSMSettlementsDataDownloader:
         self.attributes = ['name', 'name:en', 'name_en']
         ox.settings.log_console = True
         ox.settings.use_cache = True
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/229_stle/{country_code}_stle_stl_pt_s3_osm_pp_settlements.shp"
+        self.output_filename = f"{output_path}{country_code}/229_stle/{country_code}_stle_stl_pt_s3_osm_pp_settlements.shp"
 
     def download_and_process_data(self):
         # Load the region of interest geometry

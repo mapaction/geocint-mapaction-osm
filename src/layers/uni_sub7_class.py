@@ -5,14 +5,14 @@ import geopandas as gpd
 import pandas as pd
 
 class OSMEducationDataDownloader:
-    def __init__(self, geojson_path, crs_project, crs_global, country_code):
+    def __init__(self, geojson_path, crs_project, crs_global, country_code, output_path):
         self.geojson_path = geojson_path
         self.crs_project = crs_project
         self.crs_global = crs_global
         self.osm_tags = {'amenity': ['university', 'college']}
         self.attributes = ['name', 'name:en', 'name_en']  # Handle multiple values for the 'amenity' key
         ox.config(log_console=True, use_cache=True)
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/210_educ/{country_code}_educ_edu_pt_s3_osm_pp_university.gpkg"
+        self.output_filename = f"{output_path}{country_code}/210_educ/{country_code}_educ_edu_pt_s3_osm_pp_university.gpkg"
 
     def download_and_process_data(self):
         # Load the AOI from the GeoJSON file

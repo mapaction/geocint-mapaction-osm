@@ -11,11 +11,11 @@ class OSMRailwayDataDownloader:
         '!railway': ['miniature']
     }
 
-    def __init__(self, geojson_path, country_code):
+    def __init__(self, geojson_path, country_code, output_path):
         self.geojson_path = geojson_path
         ox.settings.log_console = True
         ox.settings.use_cache = True
-        self.output_dir = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/232_tran/"
+        self.output_dir = f"{output_path}{country_code}/232_tran/"
         self.output_filename = f"{country_code}_tran_rst_pt_s2_osm_pp_railwaystation.shp"
     
     def download_and_process_data(self):

@@ -3,7 +3,7 @@ import osmnx as ox
 import geopandas as gpd
 
 class OSMBankDataDownloader:
-    def __init__(self, geojson_path, crs_project, crs_global, country_code):
+    def __init__(self, geojson_path, crs_project, crs_global, country_code, output_path):
         self.geojson_path = geojson_path
         self.crs_project = crs_project  # The CRS to project geometries to before processing
         self.crs_global = crs_global    # The global CRS to convert geometries to for output
@@ -11,7 +11,7 @@ class OSMBankDataDownloader:
         self.attributes = ['name', 'name:en', 'name_en']
         ox.settings.log_console = True
         ox.settings.use_cache = True
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/208_cash/{country_code}_cash_bnk_pt_s0_osm_pp_bank.shp"
+        self.output_filename = f"{output_path}{country_code}/208_cash/{country_code}_cash_bnk_pt_s0_osm_pp_bank.shp"
      
     def download_and_process_data(self):
 

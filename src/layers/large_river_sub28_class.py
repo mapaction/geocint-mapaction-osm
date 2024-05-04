@@ -4,14 +4,14 @@ import geopandas as gpd
 import pandas as pd
 
 class OSMLargeRiverDataDownloader:
-    def __init__(self, geojson_path, crs_project, crs_global, country_code):
+    def __init__(self, geojson_path, crs_project, crs_global, country_code, output_path):
         self.geojson_path = geojson_path
         self.crs_project = crs_project
         self.crs_global = crs_global
         self.osm_tags = {'water': 'river'}
         self.attributes = ['name', 'name:en', 'name_en']
         ox.config(log_console=True, use_cache=True)
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/221_phys/{country_code}_phys_riv_py_s3_osm_pp_rivers.shp"
+        self.output_filename = f"{output_path}{country_code}/221_phys/{country_code}_phys_riv_py_s3_osm_pp_rivers.shp"
 
     def download_and_process_data(self):
         region_gdf = gpd.read_file(self.geojson_path)

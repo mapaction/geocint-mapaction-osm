@@ -7,12 +7,12 @@ class OSMRoadDataDownloader:
     osm_road_values = "motorway,trunk,primary,secondary,tertiary,unclassified,residential,motorway_link,trunk_link,primary_link,secondary_link,tertiary_link,lining_street,service,track,road"
     osm_required_tags = ['name', 'oneway', 'maxspeed', 'bridge', 'tunnel', 'surface']
 
-    def __init__(self, geojson_path, country_code):
+    def __init__(self, geojson_path, country_code, output_path):
         self.geojson_path = geojson_path
         self.country_code = country_code
         ox.settings.log_console = True
         ox.settings.use_cache = True
-        self.output_dir = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/232_tran/"
+        self.output_dir = f"{output_path}{country_code}/232_tran/"
         self.output_filename = f"{country_code}_tran_rds_ln_s0_osm_pp_roads.shp"
     
 

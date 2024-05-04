@@ -4,7 +4,7 @@ import geopandas as gpd
 import pandas as pd
 
 class OSMHospitalDataDownloader:
-    def __init__(self, geojson_path, crs_project, crs_global, country_code):
+    def __init__(self, geojson_path, crs_project, crs_global, country_code, output_path):
         self.geojson_path = geojson_path
         self.crs_project = crs_project
         self.crs_global = crs_global
@@ -13,7 +13,7 @@ class OSMHospitalDataDownloader:
         self.attributes = ['osmid', 'name', 'name:en', 'name_en', 'emergency', 'operator', 'operator:type', 'beds', 'operator_type','operator_ty']
         ox.settings.log_console = True
         ox.settings.use_cache = True
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/215_heal/{country_code}_heal_hea_pt_s3_osm_pp_hospital.shp"
+        self.output_filename = f"{output_path}{country_code}/215_heal/{country_code}_heal_hea_pt_s3_osm_pp_hospital.shp"
     def download_and_process_data(self):
         # Load the region of interest geometry
         region_gdf = gpd.read_file(self.geojson_path)
