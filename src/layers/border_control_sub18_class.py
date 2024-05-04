@@ -4,20 +4,17 @@ import geopandas as gpd
 import pandas as pd
 
 class OSMBorderControlDataDownloader:
-    def __init__(self, geojson_path, crs_project, crs_global, country_code):
-        self.geojson_path = geojson_path
+    def __init__(self, crs_project, crs_global, country_code, output_path, geojson_gdf):
         self.crs_project = crs_project
         self.crs_global = crs_global
         ox.settings.log_console = True
         ox.settings.use_cache = True
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/222_pois/{country_code}_pois_bor_pt_s3_osm_pp_bordercrossing.shp"
+        self.output_filename = f"{output_path}{country_code}/222_pois/{country_code}_pois_bor_pt_s3_osm_pp_bordercrossing.shp"
+        self.geojson_gdf = geojson_gdf
 
     def download_and_process_data(self):
-      
-        region_gdf = gpd.read_file(self.geojson_path)
-        geometry = region_gdf['geometry'].iloc[0]
+        geometry = self.geojson_gdf['geometry'].iloc[0]
 
-      
         if geometry.geom_type not in ['Polygon', 'MultiPolygon']:
             raise ValueError("Geometry type not supported. Please provide a Polygon or MultiPolygon.")
 

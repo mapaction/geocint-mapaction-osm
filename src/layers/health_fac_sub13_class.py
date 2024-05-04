@@ -4,8 +4,7 @@ import geopandas as gpd
 import pandas as pd
 
 class OSMHealthDataDownloader:
-    def __init__(self, geojson_path, crs_project, crs_global, country_code):
-        self.geojson_path = geojson_path
+    def __init__(self, crs_project, crs_global, country_code, output_path, geojson_gdf):
         self.crs_project = crs_project
         self.crs_global = crs_global
         self.osm_tags_health = {
@@ -14,12 +13,12 @@ class OSMHealthDataDownloader:
         self.attributes = ['name', 'name:en', 'name_en']
         ox.settings.log_console = True
         ox.settings.use_cache = True
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/215_heal/{country_code}_heal_hea_pt_s3_osm_pp_healthfacilities.shp"
+        self.output_filename = f"{output_path}{country_code}/215_heal/{country_code}_heal_hea_pt_s3_osm_pp_healthfacilities.shp"
+        self.geojson_gdf = geojson_gdf
 
     def download_and_process_data(self):
         # Load the region of interest geometry
-        region_gdf = gpd.read_file(self.geojson_path)
-        geometry = region_gdf['geometry'].iloc[0]
+        geometry = self.geojson_gdf['geometry'].iloc[0]
 
         # Ensure the geometry is appropriate
         if geometry.geom_type not in ['Polygon', 'MultiPolygon']:

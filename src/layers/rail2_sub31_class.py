@@ -3,8 +3,7 @@ import osmnx as ox
 import geopandas as gpd
 
 class OSMRailwayStationDataDownloader:
-    def __init__(self, geojson_path, crs_project, crs_global, country_code):
-        self.geojson_path = geojson_path
+    def __init__(self, crs_project, crs_global, country_code, output_path, geojson_gdf):
         self.crs_project = crs_project
         self.crs_global = crs_global
         self.osm_key = 'railway'
@@ -12,11 +11,11 @@ class OSMRailwayStationDataDownloader:
         self.osm_min_tags = {'passenger': 'yes', 'cargo': 'yes'}
         self.attributes = ['name', 'name:en', 'name_en', 'amenity','passenger', 'cargo']
         ox.config(log_console=True, use_cache=True)
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/232_tran/{country_code}_tran_rst_pt_s2_osm_pp_railwaystation.shp"
+        self.output_filename = f"{output_path}{country_code}/232_tran/{country_code}_tran_rst_pt_s2_osm_pp_railwaystation.shp"
+        self.geojson_gdf = geojson_gdf
 
     def download_and_process_data(self):
-        region_gdf = gpd.read_file(self.geojson_path)
-        geometry = region_gdf['geometry'].iloc[0]
+        geometry = self.geojson_gdf['geometry'].iloc[0]
 
         if geometry.geom_type not in ['Polygon', 'MultiPolygon']:
             raise ValueError("Geometry type not supported. Please provide a Polygon or MultiPolygon.")

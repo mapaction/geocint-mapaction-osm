@@ -3,22 +3,19 @@ import osmnx as ox
 import geopandas as gpd
 
 class OSMBankDataDownloader:
-    def __init__(self, geojson_path, crs_project, crs_global, country_code):
-        self.geojson_path = geojson_path
+    def __init__(self, crs_project, crs_global, country_code, output_path, geojson_gdf):
         self.crs_project = crs_project  # The CRS to project geometries to before processing
         self.crs_global = crs_global    # The global CRS to convert geometries to for output
         self.osm_tags = {'amenity': 'bank'}  # OSM tags to filter bank data4
         self.attributes = ['name', 'name:en', 'name_en']
         ox.settings.log_console = True
         ox.settings.use_cache = True
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/208_cash/{country_code}_cash_bnk_pt_s0_osm_pp_bank.shp"
-     
+        self.output_filename = f"{output_path}{country_code}/208_cash/{country_code}_cash_bnk_pt_s0_osm_pp_bank.shp"
+        self.geojson_gdf = geojson_gdf
+
     def download_and_process_data(self):
+        geometry = self.geojson_gdf['geometry'].iloc[0]
 
-        region_gdf = gpd.read_file(self.geojson_path)
-        geometry = region_gdf['geometry'].iloc[0]
-
-      
         if geometry.geom_type not in ['Polygon', 'MultiPolygon']:
             raise ValueError("Geometry type not supported. Please provide a Polygon or MultiPolygon.")
 

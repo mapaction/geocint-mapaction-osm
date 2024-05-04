@@ -11,23 +11,24 @@ class OSMRailwayDataDownloader:
         '!railway': ['miniature']
     }
 
-    def __init__(self, geojson_path, country_code):
-        self.geojson_path = geojson_path
+    def __init__(self, country_code, output_path, geojson_gdf):
         ox.settings.log_console = True
         ox.settings.use_cache = True
-        self.output_dir = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/232_tran/"
+        self.output_dir = f"{output_path}{country_code}/232_tran/"
         self.output_filename = f"{country_code}_tran_rst_pt_s2_osm_pp_railwaystation.shp"
-    
+        self.geojson_gdf = geojson_gdf
+
+
     def download_and_process_data(self):
     # Ensure output directory exists
         Path(self.output_dir).mkdir(parents=True, exist_ok=True)
 
-        region_gdf = gpd.read_file(self.geojson_path)
-        geometry_type = region_gdf['geometry'].iloc[0].geom_type
+        geometry_type = self.geojson_gdf['geometry'].iloc[0].geom_type
         if geometry_type not in ['Polygon', 'MultiPolygon']:
             raise ValueError("Geometry type not supported. Please provide a Polygon or MultiPolygon.")
 
-        polygon = region_gdf['geometry'].iloc[0]
+        # polygon = region_gdf['geometry'].iloc[0]
+        polygon = self.geojson_gdf['geometry'].iloc[0]
         gdf = ox.geometries_from_polygon(polygon, tags=self.railway_tags)
         
         # Filter out the 'miniature' railway

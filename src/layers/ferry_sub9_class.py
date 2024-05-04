@@ -4,20 +4,19 @@ import geopandas as gpd
 import pandas as pd
 
 class OSMFerryRouteDataDownloader:
-    def __init__(self, geojson_path, crs_project, crs_global, country_code):
-        self.geojson_path = geojson_path
+    def __init__(self, crs_project, crs_global, country_code, output_path, geojson_gdf):
         self.crs_project = crs_project
         self.crs_global = crs_global
         # OSM tags to search for ferry routes
         self.osm_tags = {'route': 'ferry'}  
         ox.config(log_console=True, use_cache=True)
         self.attributes = ['name', 'name:en', 'name_en']
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/232_tran/{country_code}_tran_fer_ln_s2_osm_pp_ferryroute.gpkg"
-    
+        self.output_filename = f"{output_path}{country_code}/232_tran/{country_code}_tran_fer_ln_s2_osm_pp_ferryroute.gpkg"
+        self.geojson_gdf = geojson_gdf
+
     def download_and_process_data(self):
         # Load the Area of Interest (AOI) from the GeoJSON file
-        region_gdf = gpd.read_file(self.geojson_path)
-        geometry = region_gdf['geometry'].iloc[0]
+        geometry = self.geojson_gdf['geometry'].iloc[0]
 
         # Check if the geometry is a Polygon or MultiPolygon
         if geometry.geom_type not in ['Polygon', 'MultiPolygon']:
