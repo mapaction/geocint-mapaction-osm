@@ -7,24 +7,24 @@ class OSMRoadDataDownloader:
     osm_road_values = "motorway,trunk,primary,secondary,tertiary,unclassified,residential,motorway_link,trunk_link,primary_link,secondary_link,tertiary_link,lining_street,service,track,road"
     osm_required_tags = ['name', 'oneway', 'maxspeed', 'bridge', 'tunnel', 'surface']
 
-    def __init__(self, geojson_path, country_code, output_path):
-        self.geojson_path = geojson_path
+    def __init__(self, country_code, output_path, geojson_gdf):
         self.country_code = country_code
         ox.settings.log_console = True
         ox.settings.use_cache = True
         self.output_dir = f"{output_path}{country_code}/232_tran/"
         self.output_filename = f"{country_code}_tran_rds_ln_s0_osm_pp_roads.shp"
-    
+        self.geojson_gdf = geojson_gdf
+
 
     def download_and_process_data(self):
         Path(self.output_dir).mkdir(parents=True, exist_ok=True)
 
-        gdf = gpd.read_file(self.geojson_path)
-        geometry_type = gdf['geometry'].iloc[0].geom_type
+        geometry_type = self.geojson_gdf['geometry'].iloc[0].geom_type
         if geometry_type not in ['Polygon', 'MultiPolygon']:
             raise ValueError("Geometry type not supported. Please provide a Polygon or MultiPolygon.")
         
-        polygon = gdf['geometry'].iloc[0]
+        # polygon = gdf['geometry'].iloc[0]
+        polygon = self.geojson_gdf['geometry'].iloc[0]
         graph = ox.graph_from_polygon(polygon, network_type='drive')
         _, gdf_edges = ox.graph_to_gdfs(graph)
         
