@@ -12,7 +12,7 @@ class OSMFerryRouteDataDownloader:
         self.osm_tags = {'route': 'ferry'}  
         ox.config(log_console=True, use_cache=True)
         self.attributes = ['name', 'name:en', 'name_en']
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/232_tran/{country_code}_tran_fer_ln_s2_osm_pp_ferryroute.gpkg"
+        self.output_filename = f"data/out/country_extractions/{country_code}/232_tran/{country_code}_tran_fer_ln_s2_osm_pp_ferryroute.gpkg"
     
     def download_and_process_data(self):
         # Load the Area of Interest (AOI) from the GeoJSON file

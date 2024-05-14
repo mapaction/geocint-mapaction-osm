@@ -13,7 +13,7 @@ class OSMHospitalDataDownloader:
         self.attributes = ['osmid', 'name', 'name:en', 'name_en', 'emergency', 'operator', 'operator:type', 'beds', 'operator_type','operator_ty']
         ox.settings.log_console = True
         ox.settings.use_cache = True
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/215_heal/{country_code}_heal_hea_pt_s3_osm_pp_hospital.shp"
+        self.output_filename = f"data/out/country_extractions/{country_code}/215_heal/{country_code}_heal_hea_pt_s3_osm_pp_hospital.shp"
     def download_and_process_data(self):
         # Load the region of interest geometry
         region_gdf = gpd.read_file(self.geojson_path)

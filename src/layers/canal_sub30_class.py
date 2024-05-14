@@ -10,7 +10,7 @@ class OSMCanalDataDownloader:
         self.crs_global = crs_global
         ox.config(log_console=True, use_cache=True)
         self.attributes = ['name', 'name:en', 'name_en']
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/232_tran/{country_code}_phys_can_ln_s3_osm_pp_canal.shp"
+        self.output_filename = f"data/out/country_extractions/{country_code}/232_tran/{country_code}_phys_can_ln_s3_osm_pp_canal.shp"
     
     def download_and_process_data(self):
         # Load the region of interest geometry

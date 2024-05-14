@@ -5,7 +5,7 @@ import geopandas as gpd
 class OSMLakeDataDownloader:
     def __init__(self, geojson_path, crs_project, crs_global, country_code):
         self.geojson_path = geojson_path
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/221_phys/{country_code}_phys_lak_py_s3_osm_pp_lake.shp"
+        self.output_filename = f"data/out/country_extractions/{country_code}/221_phys/{country_code}_phys_lak_py_s3_osm_pp_lake.shp"
         self.crs_project = crs_project
         self.crs_global = crs_global
         self.osm_tags = {'water': ['lake', 'reservoir']}

@@ -11,7 +11,7 @@ class OSMBankDataDownloader:
         self.attributes = ['name', 'name:en', 'name_en']
         ox.settings.log_console = True
         ox.settings.use_cache = True
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/208_cash/{country_code}_cash_bnk_pt_s0_osm_pp_bank.shp"
+        self.output_filename = f"data/out/country_extractions/{country_code}/208_cash/{country_code}_cash_bnk_pt_s0_osm_pp_bank.shp"
      
     def download_and_process_data(self):
 

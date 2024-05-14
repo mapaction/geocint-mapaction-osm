@@ -10,7 +10,7 @@ class OSMBorderControlDataDownloader:
         self.crs_global = crs_global
         ox.settings.log_console = True
         ox.settings.use_cache = True
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/222_pois/{country_code}_pois_bor_pt_s3_osm_pp_bordercrossing.shp"
+        self.output_filename = f"data/out/country_extractions/{country_code}/222_pois/{country_code}_pois_bor_pt_s3_osm_pp_bordercrossing.shp"
 
     def download_and_process_data(self):
       

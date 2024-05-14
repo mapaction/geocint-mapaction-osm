@@ -13,7 +13,7 @@ class OSMATMDataDownloader:
         self.attributes = ['name', 'name:en', 'name_en','osmid']
         ox.settings.log_console = True
         ox.settings.use_cache = True
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/208_cash/{country_code}_cash_atm_pt_s3_osm_pp_atm.shp"
+        self.output_filename = f"data/out/country_extractions/{country_code}/208_cash/{country_code}_cash_atm_pt_s3_osm_pp_atm.shp"
 
     def download_and_process_data(self):
     

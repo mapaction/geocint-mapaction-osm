@@ -11,7 +11,7 @@ class OSMFerryTerminalDataDownloader:
         self.osm_tags = {'amenity': 'ferry_terminal'}
         self.attributes = ['name', 'name:en', 'name_en']
         ox.config(log_console=True, use_cache=True)
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/232_tran/{country_code}_tran_fte_pt_s2_osm_pp_ferryterminal.gpkg"
+        self.output_filename = f"data/out/country_extractions/{country_code}/232_tran/{country_code}_tran_fte_pt_s2_osm_pp_ferryterminal.gpkg"
 
     def download_and_process_data(self):
         # Load the AOI from the GeoJSON file
