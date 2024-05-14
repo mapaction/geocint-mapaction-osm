@@ -12,7 +12,7 @@ class OSMRailwayStationDataDownloader:
         self.osm_min_tags = {'passenger': 'yes', 'cargo': 'yes'}
         self.attributes = ['name', 'name:en', 'name_en', 'amenity','passenger', 'cargo']
         ox.config(log_console=True, use_cache=True)
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/232_tran/{country_code}_tran_rst_pt_s2_osm_pp_railwaystation.shp"
+        self.output_filename = f"data/out/country_extractions/{country_code}/232_tran/{country_code}_tran_rst_pt_s2_osm_pp_railwaystation.shp"
 
     def download_and_process_data(self):
         region_gdf = gpd.read_file(self.geojson_path)

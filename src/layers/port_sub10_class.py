@@ -11,7 +11,7 @@ class OSMPortDataDownloader:
         ox.settings.log_console = True
         ox.settings.use_cache = True
         self.attributes = ['name', 'name:en', 'name_en']
-        self.output_filename = f"/home/gis/dedicated_disk/geocint/data/out/country_extractions/{country_code}/232_tran/{country_code}_tran_por_pt_s0_osm_pp_port.shp"
+        self.output_filename = f"data/out/country_extractions/{country_code}/232_tran/{country_code}_tran_por_pt_s0_osm_pp_port.shp"
         
 
     def download_and_process_data(self):
