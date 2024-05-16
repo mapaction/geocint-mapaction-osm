@@ -9,7 +9,7 @@ The project is organized into modular Python scripts, each dedicated to handling
 
 - Diverse Data Handling: Classes for downloading and processing data for roads, rivers, schools, hospitals, and other geographic features.
 - Efficient Data Processing: Techniques for filtering, reprojecting, and formatting data to meet specific analysis or storage needs.
-- Custom CRS Handling: Functionality to map country codes to their corresponding Coordinate Reference Systems (CRS) for accurate geographic representation.
+- CRS Handling: Functionality to map country codes to their corresponding Coordinate Reference Systems (CRS) for accurate geographic representation.
 
 ## Getting Started
 
@@ -22,16 +22,15 @@ Ensure you have Python 3.6+ installed on your system. The project depends on sev
 #### Pandas
 #### Pathlib
 
-#### Install these dependencies using pip:
 
-pip install osmnx geopandas pandas pathlib
+#### All Python dependencies are installed by the geocint-runner/runner-install.sh
 
 
 ### Usage
 
-Prepare your GeoJSON files: Place your GeoJSON files in the designated directory. Ensure that each file is named according to the country code it represents.
+Prepare your GeoJSON files: Place your GeoJSON files in the geocint-mapaction/static_data/countries/ directory. Ensure that each file is named according to the country code it represents.
 
-Run the Makefile: Execute the main Python script to start the process of data downloading and processing.
+Start the pipeline: Run the command bash geocint-runner/start_geocint.sh to start the whole data downloading and processing pipeline. The Makefile will be executed automatically.
 
 Review the output: Processed data will be saved in the specified output directory, organized by data type and country code.
 
